@@ -9,7 +9,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 // Connect to the db
-mongoose.connect('mongodb://localhost:27017/vote');
+mongoose.connect('mongodb://bahaazidan:allahakbar8@ds133281.mlab.com:33281/ex40');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
