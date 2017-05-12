@@ -43,8 +43,8 @@ router.post('/login', (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(401).json({
-        err: info
+      return res.json({
+        status: `Authentication Problem :: ${info.message}`
       });
     }
     req.logIn(user, (err) => {
