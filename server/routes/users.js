@@ -27,9 +27,9 @@ router.route('/')
 
 router.post('/register', (req, res) => {
   users.register(new users({ username : req.body.username }), req.body.password, (err, val) => {
-    if (err) return res.status(400).json({status: `Authentication Problem :: ${err}`});
+    if (err) return res.json({status: `Authentication Problem :: ${err}`});
     val.save((err,user) => {
-      if (err) return res.status(400).json({status: `Authentication Problem :: ${err}`});
+      if (err) return res.json({status: `Authentication Problem :: ${err}`});
       passport.authenticate('local')(req, res, () => { 
         return res.status(200).json({status: 'Registration Successful!'});
       });
