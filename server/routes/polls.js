@@ -74,19 +74,11 @@ pollsRouter.route('/:pollId')
     });
 });
 
-pollsRouter.route('/byauthor/:authorId')
+pollsRouter.route('/byauthor/')
 .get(Verify.verifyOrdinaryUser, (req, res, next) => {
-    console.log(req.params.authorId);
-    polls.find({author: req.params.authorId}, (err, val) => {
+    polls.find({author: req.decoded._doc._id}, (err, val) => {
         if (err) throw err;
-        if (req.decoded._doc._id != val.author) {
-            let error = new Error('You are not the owner of these polls');
-            error.status = 403;
-            return next(error);
-        } else {
-            if (err) throw err;
-            res.json(val);
-        }
+        res.json(val);
     });
 });
 
