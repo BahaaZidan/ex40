@@ -74,6 +74,20 @@ pollsRouter.route('/:pollId')
     });
 });
 
+pollsRouter.route('/byauthor/:authorId')
+.get(Verify.verifyOrdinaryUser, (req, res, next) => {
+    polls.find({author: req.params.author}, (err, val) => {
+        if (err) throw err;
+        if (req.decoded._doc._id != val.author) {
+            let error = new Error('You are not the owner of these polls');
+            error.status = 403;
+            return next(error);
+        } else {
+            res.json(val);
+        }
+    });
+});
+
 //store the pollId and the optionId into 
 pollsRouter.route('/:pollId/vote/:optionId')
 .post((req, res) => {
