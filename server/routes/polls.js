@@ -77,7 +77,7 @@ pollsRouter.route('/:pollId')
 pollsRouter.route('/byauthor/')
 .get(Verify.verifyOrdinaryUser, (req, res, next) => {
     polls.find({author: req.decoded._doc._id}, (err, val) => {
-        if (err) throw err;
+        if (err) return res.json({status: `error retrieving polls :: ${err}`});
         res.json(val);
     });
 });
