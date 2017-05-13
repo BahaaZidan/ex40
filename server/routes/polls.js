@@ -76,6 +76,7 @@ pollsRouter.route('/:pollId')
 
 pollsRouter.route('/byauthor/:authorId')
 .get(Verify.verifyOrdinaryUser, (req, res, next) => {
+    console.log(req.params.authorId);
     polls.find({author: req.params.authorId}, (err, val) => {
         if (err) throw err;
         if (req.decoded._doc._id != val.author) {
@@ -83,6 +84,7 @@ pollsRouter.route('/byauthor/:authorId')
             error.status = 403;
             return next(error);
         } else {
+            if (err) throw err;
             res.json(val);
         }
     });
