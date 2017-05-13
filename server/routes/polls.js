@@ -30,6 +30,14 @@ pollsRouter.route('/')
     });
 });
 
+pollsRouter.route('/byauthor/')
+.get(Verify.verifyOrdinaryUser, (req, res, next) => {
+    polls.find({author: req.decoded._doc._id}, (err, val) => {
+        if (err) return res.json({status: `error retrieving polls :: ${err}`});
+        res.json(val);
+    });
+});
+
 pollsRouter.route('/:pollId')
 .get((req, res) => {
     polls.findById(req.params.pollId)
@@ -71,14 +79,6 @@ pollsRouter.route('/:pollId')
                 res.json(val);
             });
         }
-    });
-});
-
-pollsRouter.route('/byauthor/')
-.get(Verify.verifyOrdinaryUser, (req, res, next) => {
-    polls.find({author: req.decoded._doc._id}, (err, val) => {
-        if (err) return res.json({status: `error retrieving polls :: ${err}`});
-        res.json(val);
     });
 });
 
