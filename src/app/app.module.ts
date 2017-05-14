@@ -11,14 +11,24 @@ import {
   voteRoutes,
   VoteModule
 } from './vote/vote.module';
+import { SoonComponent } from './soon/soon.component';
 
 
 
 const Routes = [
   {
+    path: '',
+    redirectTo: 'vote',
+    pathMatch:'full'
+  },
+  {
     path: 'vote',
     component: VoteComponent,
     children:voteRoutes
+  },
+  {
+    path: 'soon',
+    component: SoonComponent
   }
 ];
 
@@ -27,7 +37,8 @@ const Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    VoteComponent
+    VoteComponent,
+    SoonComponent
   ],
   imports: [
     BrowserModule,

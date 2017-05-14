@@ -2,8 +2,16 @@
   <div class="jumbotron">
     <h1 >EX-VOTE</h1> 
     <p>Make Your Own Polls in a Flash</p>
-    <a routerLink="./login"><button class="btn btn-primary btn-md">Login</button></a>
-    <a routerLink="./signup"><button class="btn btn-primary btn-md">SignUp</button></a>
+    <div *ngIf="!signed">
+      <a routerLink="./login"><button class="btn btn-primary btn-md">Login</button></a>
+      <a routerLink="./signup"><button class="btn btn-primary btn-md">SignUp</button></a>
+    </div>
+    <div *ngIf="signed">
+      <a routerLink="./addpoll"><button class="btn btn-success btn-md"><span class="glyphicon glyphicon-plus"></span> Create a Poll</button></a>
+      <a routerLink="./yourpolls"><button class="btn btn-primary btn-md"><span class="glyphicon glyphicon-stats"></span> Your Polls</button></a>
+      <button class="btn btn-warning btn-md" (click)="logout()"><span class="glyphicon glyphicon-off"></span> Logout</button>
+    </div>
+    
   </div>
   <router-outlet></router-outlet>
 </div>

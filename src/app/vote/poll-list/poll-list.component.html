@@ -3,6 +3,6 @@
     <br>
     Vote on any Poll or SignUp and Make Your Own NOW !
   </h3>
-  <!--<app-poll-notation *ngFor="let poll of polls" pollName={{poll.name}} pollLink={{poll.link}}></app-poll-notation>-->
-  <!--<p *ngIf="response">{{response[0]._id}} {{response[0].title}}</p>-->
+  <app-poll-notation *ngFor="let x of response" pollAuthor={{x.author.username}} pollTitle={{x.title}} pollId={{x._id}}></app-poll-notation>
+  
 </div>

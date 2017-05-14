@@ -25,11 +25,10 @@ export class PollListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.voteService.getPolls()
+    this.voteService.getAllPolls()
       .subscribe(polls => {
         this.response = polls;
-        console.log(this.response);
-        console.log(polls);
+        
       });
   }
   ngOnChanges() {

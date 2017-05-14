@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { VoteService } from './vote.service';
 
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.css']
+  styleUrls: ['./vote.component.css'],
+  providers:[CookieService]
 })
 export class VoteComponent implements OnInit {
-
-  constructor(private voteService:VoteService) { }
+  signed: boolean;
+  constructor(private voteService:VoteService, private cookieService: CookieService, private router:Router) {
+    if (this.cookieService.get('user')) {
+      this.signed = true;
+    } else {
+      this.signed = false;
+    }
+  }
+  logout(): void {
+    this.cookieService.remove('user');
+    this.cookieService.remove('token');
+    this.router.navigate(['/vote/polls']);
+    window.location.reload();
+  }
 
   ngOnInit() {
     

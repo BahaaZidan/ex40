@@ -1,3 +1,17 @@
-<p>
-  your-polls works!
-</p>
+<div class="jumbotron">
+  <h3>Your Polls</h3>
+  <div class="alert alert-success" *ngIf="deleted">Successful Removal</div>
+  <div class="row" *ngFor="let p of polls">
+    <div class="col-xs-12 col-md-10">
+      <a routerLink="/vote/polls/{{p._id}}"><button class="btn btn-md btn-block btn-default">{{p.title}}</button></a>
+    </div>
+    <div class="col-xs-3 col-md-1">
+      <a routerLink="/vote/edit/{{p._id}}"><button class="btn btn-md btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</button></a>
+    </div>
+    <div class="col-xs-3 col-md-1">
+      <button class="btn btn-md btn-danger" (click)="deletePoll(p._id)"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+    </div>
+  </div>
+  
+
+</div>

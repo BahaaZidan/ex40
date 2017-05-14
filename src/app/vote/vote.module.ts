@@ -12,7 +12,7 @@ import {
 
 import { VoteService } from './vote.service';
 
-import { HeaderComponent } from './header/header.component';
+
 import { PollListComponent } from './poll-list/poll-list.component';
 import { PollComponent } from './poll/poll.component';
 import { YourPollsComponent } from './your-polls/your-polls.component';
@@ -33,16 +33,16 @@ export const voteRoutes = [
     component:PollListComponent
   },
   {
+    path:'polls/:id',
+    component:PollComponent
+  },
+  {
     path:'login',
     component:LoginComponent
   },
   {
     path:'signup',
     component:SignUpComponent
-  },
-  {
-    path:'poll',
-    component:PollComponent
   },
   {
     path:'yourpolls',
@@ -53,7 +53,7 @@ export const voteRoutes = [
     component:AddPollComponent
   },
   {
-    path:'editpoll',
+    path:'edit/:id',
     component:EditPollComponent
   }
   

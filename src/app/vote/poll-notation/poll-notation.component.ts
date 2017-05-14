@@ -6,11 +6,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./poll-notation.component.css']
 })
 export class PollNotationComponent implements OnInit {
-  @Input() pollName: string;
-  @Input() pollLink: string;
-  constructor() { }
+  @Input() pollId: string;
+  @Input() pollTitle: string;
+  @Input() pollAuthor: string;
+  constructor() {
+    
+  }
 
   ngOnInit() {
+    
   }
 
 }
