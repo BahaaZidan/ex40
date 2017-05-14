@@ -12,20 +12,20 @@ pollsRouter.route('/')
     polls.find({})
         .populate('author')
         .exec((err, val) => {
-            if (err) throw err;
+            if (err) return res.json({status: `error retrieving polls :: ${err}`});
             res.json(val);
     });
 })
 .post(Verify.verifyOrdinaryUser, (req, res) => {
     req.body.author = req.decoded._doc._id;
     polls.create(req.body, (err, val) => {
-        if (err) throw err;
+        if (err) return res.json({status: `error posting :: ${err}`});
         res.json(val);
     });
 })
 .delete(Verify.verifyOrdinaryUser, (req, res) => {
     polls.remove({}, (err, val) => {
-        if (err) throw err;
+        if (err) return res.json({status: `error deleting :: ${err}`});
         res.json(val);
     });
 });
