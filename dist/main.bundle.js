@@ -27,8 +27,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var VoteService = (function () {
     function VoteService(http) {
         this.http = http;
-        this.pollsUrl = 'http://ex40.herokuapp.com/api/polls/';
-        this.usersUrl = 'http://ex40.herokuapp.com/api/users'; // URL to web api
+        this.pollsUrl = '/api/polls/';
+        this.usersUrl = '/api/users'; // URL to web api
     }
     VoteService.prototype.getAllPolls = function () {
         return this.http.get(this.pollsUrl)
