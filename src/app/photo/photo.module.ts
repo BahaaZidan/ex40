@@ -9,7 +9,6 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { PhotoPageComponent } from './photo-page/photo-page.component';
 import { PhotoBadgeComponent } from './photo-badge/photo-badge.component';
 import { AddComponent } from './add/add.component';
-import { EditComponent } from './edit/edit.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -33,10 +32,6 @@ export const photoRoutes = [
     component:AddComponent
   },
   {
-    path:'edit/:photoId',
-    component:EditComponent
-  },
-  {
     path:'page/:photoId',
     component:PhotoPageComponent
   },
@@ -58,7 +53,7 @@ export const photoRoutes = [
     MasonryModule
   ],
   providers:[PhotoService],
-  declarations: [GalleryComponent, PhotoPageComponent, PhotoBadgeComponent, AddComponent, EditComponent, LoginComponent, SignupComponent],
-  exports: [GalleryComponent, PhotoPageComponent, PhotoBadgeComponent, AddComponent, EditComponent, LoginComponent, SignupComponent]
+  declarations: [GalleryComponent, PhotoPageComponent, PhotoBadgeComponent, AddComponent, LoginComponent, SignupComponent],
+  exports: [GalleryComponent, PhotoPageComponent, PhotoBadgeComponent, AddComponent, LoginComponent, SignupComponent]
 })
 export class PhotoModule { }
