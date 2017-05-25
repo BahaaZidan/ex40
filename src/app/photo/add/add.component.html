@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+  <form id="addForm" action="/blog" method="post" enctype="multipart/form-data" (submit)="add($event)" #formData>
+
+    <div class="form-group">
+      <label for="photo">Photo</label>
+      <input type="file" name="photo" id="photo">
+      <p class="help-block">Beware : any photo you upload is always public and can be shared by any one</p>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea form="addForm" class="form-control" name="description" id="description"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-default">Submit</button>
+  </form>
+</div>

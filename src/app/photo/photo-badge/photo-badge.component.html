@@ -1,0 +1,22 @@
+<masonry-brick class="brick">
+  <div class="thumbnail">
+    <a routerLink="/photo/page/{{id}}"><img src="uploads{{url}}" (load)="photoLoaded($event)"></a>
+    <div class="caption">
+      
+      <div *ngIf="!editing">
+        <p>{{description}}</p>
+        <button *ngIf="isAuthor" class="btn btn-default btn-xs pull-right" role="button" (click)="editSwitch()"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+        <button *ngIf="isAuthor" class="btn btn-danger btn-xs pull-right" role="button" (click)="delete()"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+
+        <button *ngIf="!isAuthor" [ngClass]="{'btn-info' : isLiked}" class="btn btn-default btn-xs" role="button" (click)="doLike()"><i class="glyphicon glyphicon-thumbs-up"></i> Like</button>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://ex40.herokuapp.com/photo/page/{{id}}" target="_blank"><button class="btn btn-default btn-xs" role="button"><i class="glyphicon glyphicon-bullhorn"></i> Share</button></a>
+      </div>
+      <div *ngIf="editing">
+        <textarea class="form-control" #newDescription>{{description}}</textarea>
+        <button class="btn btn-default btn-xs pull-right" (click)="editSwitch()">Cancel</button>
+        <button class="btn btn-default btn-xs pull-right" (click)="edit(newDescription.value)">Save</button>
+      </div>
+
+    </div>
+  </div>
+</masonry-brick>

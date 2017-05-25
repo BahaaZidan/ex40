@@ -25,7 +25,6 @@ export class YourPollsComponent implements OnInit {
   getPollByUser(): void {
     this.voteService.getPollByUser(this.cookieService.get('token'))
       .subscribe(polls => {
-        
         this.polls = polls;
       });
   }

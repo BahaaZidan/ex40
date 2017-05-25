@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h3 *ngIf="!photo">Loading ...</h3>
+  <div class="thumbnail" *ngIf="photo">
+    <a routerLink="/photo/edit/{{id}}"><button *ngIf="isAuthor" class="btn btn-default btn pull-right" role="button"><i class="glyphicon glyphicon-pencil"></i> Edit</button></a>
+    <button *ngIf="isAuthor" class="btn btn-danger btn pull-right" role="button" (click)="delete()"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+
+    <button *ngIf="!isAuthor" [ngClass]="{'btn-info' : isLiked}" class="btn btn-default btn" role="button" (click)="doLike()"><i class="glyphicon glyphicon-thumbs-up"></i> Like</button>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://ex40.herokuapp.com/photo/page/{{id}}" target="_blank"><button class="btn btn-default btn" role="button"><i class="glyphicon glyphicon-bullhorn"></i> Share</button></a>
+    <img src="uploads{{photo.url}}">
+    <div class="caption">
+      <h4>{{photo.description}}</h4>
+      <hr>
+      <h5>Posted by <a routerLink="/photo/gallery/{{photo.author.username}}">{{photo.author.username}}</a> at {{photo.createdAt.substring(0, 10)}}</h5>
+      <h5 class="">{{photo.likers.length}} Likes</h5>
+    </div>
+  </div>
+
+</div>

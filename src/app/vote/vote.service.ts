@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 import { Poll } from './poll.interface';
 
 @Injectable() export class VoteService {
-    private pollsUrl = '/api/polls/';
-    private usersUrl = '/api/users';  // URL to web api
+    private pollsUrl = '/api/polls/'; //'http://localhost:3000/api/polls/';
+    private usersUrl =  '/api/users';  // URL to web api'http://localhost:3000/api/users';
     constructor(private http: Http) { }
     getAllPolls():any {
         return this.http.get(this.pollsUrl)

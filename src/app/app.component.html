@@ -4,12 +4,12 @@
       <a class="navbar-brand" routerLink="/">EX40</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a routerLink="/vote">Vote</a></li>
-      <li><a routerLink="/soon">Coordinate</a></li>
-      <li><a routerLink="/soon">Stock Charts</a></li>
-      <li><a routerLink="/soon">Trade Books</a></li>
-      <li><a routerLink="/soon">Pinterest Clone</a></li>
-      <li><a routerLink="/soon">Micro Services</a></li>
+      <li [ngClass]="{active: active == 'vote'}" (click)="setActive('vote')"><a routerLink="/vote">Vote</a></li>
+      <li [ngClass]="{active: active == 'coordinate'}" (click)="setActive('coordinate')"><a routerLink="/soon">Coordinate</a></li>
+      <li [ngClass]="{active: active == 'stock'}" (click)="setActive('stock')"><a routerLink="/soon">Stock Charts</a></li>
+      <li [ngClass]="{active: active == 'trade'}" (click)="setActive('trade')"><a routerLink="/soon">Trade Books</a></li>
+      <li [ngClass]="{active: active == 'photo'}" (click)="setActive('photo')"><a routerLink="/photo">Pinterest Clone</a></li>
+      <li [ngClass]="{active: active == 'micro'}" (click)="setActive('micro')"><a routerLink="/soon">Micro Services</a></li>
     </ul>
   </div>
 </nav>

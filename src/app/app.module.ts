@@ -6,25 +6,38 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { VoteComponent } from './vote/vote.component';
+import { PhotoComponent } from './photo/photo.component';
+import { SoonComponent } from './soon/soon.component';
 
 import {
   voteRoutes,
   VoteModule
 } from './vote/vote.module';
-import { SoonComponent } from './soon/soon.component';
+
+import {
+  photoRoutes,
+  PhotoModule
+} from './photo/photo.module';
+
+
 
 
 
 const Routes = [
   {
     path: '',
-    redirectTo: 'vote',
+    redirectTo: 'photo',
     pathMatch:'full'
   },
   {
     path: 'vote',
     component: VoteComponent,
     children:voteRoutes
+  },
+  {
+    path: 'photo',
+    component: PhotoComponent,
+    children:photoRoutes
   },
   {
     path: 'soon',
@@ -38,6 +51,7 @@ const Routes = [
   declarations: [
     AppComponent,
     VoteComponent,
+    PhotoComponent,
     SoonComponent
   ],
   imports: [
@@ -45,7 +59,8 @@ const Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-    VoteModule
+    VoteModule,
+    PhotoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

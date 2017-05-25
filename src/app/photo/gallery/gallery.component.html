@@ -1,0 +1,5 @@
+<masonry [options]="options">
+  <div *ngFor="let p of photos">
+    <app-photo-badge *ngIf="p.author" (notify)="onNotify($event)" (loaded)="onLoaded($event)" url={{p.url}} id={{p._id}} likers={{p.likers}} author={{p.author}} authorId={{p.author._id}} description={{p.description}}></app-photo-badge>
+  </div>
+</masonry>

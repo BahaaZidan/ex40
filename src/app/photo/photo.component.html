@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 >EX-PHOTO</h1> 
+    <p>The Simplist Way to Share Your Photos</p>
+    <div *ngIf="!signed">
+      <button class="btn btn-info btn-md" (click)="facebook()">Login via Facebook</button>
+      <a routerLink="./login"><button class="btn btn-primary btn-md">Login</button></a>
+      <a routerLink="./signup"><button class="btn btn-primary btn-md">SignUp</button></a>
+    </div>
+    <div *ngIf="signed">
+      <a routerLink="./add"><button class="btn btn-success btn-md"><span class="glyphicon glyphicon-plus"></span> Add Photo</button></a>
+      <a routerLink="./gallery/{{username}}"><button class="btn btn-primary btn-md"><span class="glyphicon glyphicon-picture"></span> Gallery</button></a>
+      <button class="btn btn-warning btn-md" (click)="logout()"><span class="glyphicon glyphicon-off"></span> Logout</button>
+    </div>
+    
+  </div>
+  <router-outlet></router-outlet>
+</div>
+

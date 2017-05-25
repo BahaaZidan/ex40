@@ -3,7 +3,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { VoteService } from './vote.service';
+
 
 @Component({
   selector: 'app-vote',
@@ -13,7 +13,7 @@ import { VoteService } from './vote.service';
 })
 export class VoteComponent implements OnInit {
   signed: boolean;
-  constructor(private voteService:VoteService, private cookieService: CookieService, private router:Router) {
+  constructor(private cookieService: CookieService, private router:Router) {
     if (this.cookieService.get('user')) {
       this.signed = true;
     } else {
