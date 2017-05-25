@@ -5,14 +5,22 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const User = new Schema({
     username: {
         type: String,
-        unique: true,
-        required: true
+        unique: true
+    },
+    facebookId: {
+        type: String,
+        unique: true
+    },
+    facebookToken: {
+        type: String,
+        unique: true
     },
     password:String
 });
 
 
 User.plugin(passportLocalMongoose);
+
 
 module.exports = mongoose.model('User', User);
 

@@ -19,6 +19,7 @@ db.once('open', () => {
 
 // Get our API routes
 const polls = require('./routes/polls');
+const photos = require('./routes/photos');
 const users = require('./routes/users');
 
 const app = express();
@@ -32,12 +33,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 app.use(passport.initialize());
 
 
 // Set our api routes
 app.use('/api/polls', polls);
+app.use('/api/photos', photos);
 app.use('/api/users', users);
 
 // Catch all other routes and return the index file
