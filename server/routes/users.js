@@ -15,7 +15,7 @@ passport.deserializeUser(users.deserializeUser());
 const twitter = passport.use(new FacebookStrategy({
   clientID: '1642906752405807',
   clientSecret: 'cd1c6a5e4a5a56b7bad13a305b40671e',
-  callbackURL: 'http://ex40.herokuapp.com/api/users/facebook/cb'
+  callbackURL: 'http://ex40.herokuapp.com/api/users/facebook/cb&origin=*'
 }, (token, refreshToken, profile, done) => {
   users.findOne({ facebookId: profile.id }, (err, user) => {
     if (err) {
