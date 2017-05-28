@@ -125,6 +125,19 @@ var PhotoService = (function () {
         return this.http.post("" + this.photosUrl, body, options)
             .map(function (res) { return res.json(); });
     };
+    PhotoService.prototype.addUrl = function (url, description, token) {
+        //setting the token header
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
+        headers.append('token', token);
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]();
+        options.headers = headers;
+        var body = {
+            "url": url,
+            "description": description
+        };
+        return this.http.post("" + this.photosUrl, body, options)
+            .map(function (res) { return res.json(); });
+    };
     PhotoService.prototype.delete = function (photoId, token) {
         //setting the token header
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
@@ -405,12 +418,24 @@ var AddComponent = (function () {
         this.router = router;
         this.cookieService = cookieService;
     }
-    AddComponent.prototype.add = function (event) {
+    /*
+    add(event: Event): void{
+      event.preventDefault();
+      let formEl: HTMLFormElement = this.formEl.nativeElement;
+      let formData: FormData = new FormData(formEl);
+      this.photoService.add(formData, this.cookieService.get('token'))
+        .subscribe(res => {
+          if (res._id) {
+            this.router.navigate([`/photo/page/${res._id}`]);
+          } else {
+            this.error = 'an error occured';
+          }
+        });
+    }
+  */
+    AddComponent.prototype.add = function (url, description) {
         var _this = this;
-        event.preventDefault();
-        var formEl = this.formEl.nativeElement;
-        var formData = new FormData(formEl);
-        this.photoService.add(formData, this.cookieService.get('token'))
+        this.photoService.addUrl(url, description, this.cookieService.get('token'))
             .subscribe(function (res) {
             if (res._id) {
                 _this.router.navigate([("/photo/page/" + res._id)]);
@@ -2049,7 +2074,7 @@ module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"containe
 /***/ 565:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron\">\n  <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n\n  <form id=\"addForm\" action=\"/blog\" method=\"post\" enctype=\"multipart/form-data\" (submit)=\"add($event)\" #formData>\n\n    <div class=\"form-group\">\n      <label for=\"photo\">Photo</label>\n      <input type=\"file\" name=\"photo\" id=\"photo\">\n      <p class=\"help-block\">Beware : any photo you upload is always public and can be shared by any one</p>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"description\">Description</label>\n      <textarea form=\"addForm\" class=\"form-control\" name=\"description\" id=\"description\"></textarea>\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-lg btn-default\">Submit</button>\n  </form>\n</div>"
+module.exports = "<div class=\"jumbotron\">\n  <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n\n\n\n    <div class=\"form-group\">\n      <label for=\"photo\">Photo URL</label>\n      <input type=\"text\" name=\"photo\" id=\"photo\" #url>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"description\">Description</label>\n      <textarea class=\"form-control\" name=\"description\" id=\"description\" #description></textarea>\n    </div>\n\n    <button class=\"btn btn-lg btn-default\" (click)=\"add(url.value, description.value)\">Submit</button>\n\n</div>\n\n<!--\n  <div class=\"jumbotron\">\n  <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n\n  <form id=\"addForm\" action=\"/blog\" method=\"post\" enctype=\"multipart/form-data\" (submit)=\"add($event)\" #formData>\n\n    <div class=\"form-group\">\n      <label for=\"photo\">Photo</label>\n      <input type=\"file\" name=\"photo\" id=\"photo\">\n      <p class=\"help-block\">Beware : any photo you upload is always public and can be shared by any one</p>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"description\">Description</label>\n      <textarea form=\"addForm\" class=\"form-control\" name=\"description\" id=\"description\"></textarea>\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-lg btn-default\">Submit</button>\n  </form>\n</div>\n-->"
 
 /***/ }),
 
@@ -2084,7 +2109,7 @@ module.exports = "<div class=\"jumbotron\">\n  <h3 *ngIf=\"!photo\">Loading ...<
 /***/ 570:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 >EX-PHOTO</h1> \n    <p>The Simplist Way to Share Your Photos</p>\n    <div *ngIf=\"!signed\">\n      <button class=\"btn btn-info btn-md\" (click)=\"facebook()\">Login via Facebook</button>\n      <a routerLink=\"./login\"><button class=\"btn btn-primary btn-md\">Login</button></a>\n      <a routerLink=\"./signup\"><button class=\"btn btn-primary btn-md\">SignUp</button></a>\n    </div>\n    <div *ngIf=\"signed\">\n      <a routerLink=\"./add\"><button class=\"btn btn-success btn-md\"><span class=\"glyphicon glyphicon-plus\"></span> Add Photo</button></a>\n      <a routerLink=\"./gallery/{{username}}\"><button class=\"btn btn-primary btn-md\"><span class=\"glyphicon glyphicon-picture\"></span> Gallery</button></a>\n      <button class=\"btn btn-warning btn-md\" (click)=\"logout()\"><span class=\"glyphicon glyphicon-off\"></span> Logout</button>\n    </div>\n    \n  </div>\n  <router-outlet></router-outlet>\n</div>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 >EX-PHOTO</h1> \n    <p>The Simplist Way to Share Your Photos</p>\n    <div *ngIf=\"!signed\">\n      <!--<button class=\"btn btn-info btn-md\" (click)=\"facebook()\">Login via Facebook</button>-->\n      <a routerLink=\"./login\"><button class=\"btn btn-primary btn-md\">Login</button></a>\n      <a routerLink=\"./signup\"><button class=\"btn btn-primary btn-md\">SignUp</button></a>\n    </div>\n    <div *ngIf=\"signed\">\n      <a routerLink=\"./add\"><button class=\"btn btn-success btn-md\"><span class=\"glyphicon glyphicon-plus\"></span> Add Photo</button></a>\n      <a routerLink=\"./gallery/{{username}}\"><button class=\"btn btn-primary btn-md\"><span class=\"glyphicon glyphicon-picture\"></span> Gallery</button></a>\n      <button class=\"btn btn-warning btn-md\" (click)=\"logout()\"><span class=\"glyphicon glyphicon-off\"></span> Logout</button>\n    </div>\n    \n  </div>\n  <router-outlet></router-outlet>\n</div>\n\n"
 
 /***/ }),
 

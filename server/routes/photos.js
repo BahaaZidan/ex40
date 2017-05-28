@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer  = require('multer');
 
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/')
@@ -29,11 +30,12 @@ photosRouter.route('/')
   })
 })
 
-.post(verify.verifyOrdinaryUser,upload.single('photo'),(req,res,next) => {
+.post(verify.verifyOrdinaryUser/*,upload.single('photo')*/,(req,res,next) => {
     let request = {
       "description":req.body.description,
       "author":req.decoded._doc._id,
-      "url":req.file.path.substring(7)
+      "url":req.body.url
+      /*"url":req.file.path.substring(7)*/
     };
     console.log(request);
     console.log(req.file);
@@ -77,7 +79,7 @@ photosRouter.route('/:photoId')
       res.json(val);
     });
 })
-// thumbnail will need to be changed
+
 .put(verify.verifyOrdinaryUser, function(req,res,next){
   console.log(req.params.photoId);
   console.log(req.body);
